@@ -32,9 +32,9 @@ def remesh_multiple(idir, odir, edge, scaling, smoothing):
             smoother.Execute()
         # scale from m -> mm
         scaler = vmtk.vmtksurfacescaling.vmtkSurfaceScaling()
-        scaler.ScaleFactor = 0.001
+        scaler.ScaleFactor = scaling
         scaler.Surface = smoother.Surface
-        if(scaling=="y"):
+        if(scaling is not 1.):
             scaler.Execute()
         # write surface as vtk
         writer = vmtk.vmtksurfacewriter.vmtkSurfaceWriter()
@@ -64,9 +64,9 @@ def remesh_single(ifile, ofile, edge, scaling, smoothing):
             smoother.Execute()
         # scale from m -> mm
         scaler = vmtk.vmtksurfacescaling.vmtkSurfaceScaling()
-        scaler.ScaleFactor = 0.001
+        scaler.ScaleFactor = scaling
         scaler.Surface = smoother.Surface
-        if(scaling=="y"):
+        if(scaling is not 1.):
             scaler.Execute()
         # write surface as vtk
         writer = vmtk.vmtksurfacewriter.vmtkSurfaceWriter()
@@ -82,15 +82,15 @@ if __name__=="__main__":
     if mode==1:
         ifile = input("Enter path to file: ")
         ofile = input("Enter the full output path: ")
-        edge = float(input("Global nominal target edge length (default=0.005):") or 0.005)
-        scale = input("scale mesh m->mm (y or n): ") or "y"
+        edge = float(input("Global nominal target edge length (default=2mm):") or 2)
+        scale = float(input("Scale factor (enter 1 for no scaling): ") or 1)
         smooth = input("smooth mesh (y or n): ") or "y"
         remesh_single(ifile, ofile, edge, scale, smooth)
 
     if mode==2:
         idir = input("Enter input directory: ")
         odir = input("Enter output directory: ")
-        edge = float(input("Global nominal target edge length (default=0.005):") or 0.005)
-        scale = input("scale mesh m->mm (y or n): ") or "y"
+        edge = float(input("Global nominal target edge length (default=2mm):") or 2)
+        scale = float(input("Scale factor (enter 1 for no scaling): ") or 1)
         smooth = input("smooth mesh (y or n): ") or "y"
         remesh_multiple(idir, odir, edge, scale, smooth)
