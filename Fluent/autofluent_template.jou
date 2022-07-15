@@ -29,6 +29,11 @@
 ; load in mesh
 (ti-menu-load-string (format #f "file rc ~a~a.msh OK" filedir i))
 
+; improve quality
+(ti-menu-load-string (format #f "/mesh/repair-improve/improve-quality"))
+
+; make mesh polyhedral
+(ti-menu-load-string (format #f "/mesh/polyhedra/convert-domain"))
 
 ; **********SCALE MESH TO METRES**********
 (ti-menu-load-string (format #f "mesh/scale 0.001 0.001 0.001"))
