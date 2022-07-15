@@ -6,6 +6,9 @@ def prepare_cfd(idir, odir, jpath):
     - copies journal template to jou_path
     - populates it with the mesh filenames in idir
     '''
+    if not os.path.exists(odir):
+        os.makedirs(odir)
+
     template_dir = os.path.join(os.getcwd(), 'autofluent_template.jou')
     copyfile(template_dir, jpath + 'autofluent.jou')
 
