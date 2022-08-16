@@ -54,4 +54,7 @@ The process is split up into different stages:
 3. Run: `$ cfd_dnn_training.ipynb` (update directories).
 4. Run: `$ cfd_dnn_testing.ipynb` (update directories).  
 
-To get in contact, email: endrit.pajaziti.13@ucl.ac.uk
+To get in contact, email: endrit.pajaziti.13@ucl.ac.uk  
+
+
+![alt text](https://github.com/EndritPJ/CFD_Machine_Learning/blob/main/widget.gif)
