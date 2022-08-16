@@ -52,4 +52,6 @@ The process is split up into different stages:
 1. Enter the Keras conda environment.
 2. The training/testing data consists of the aortic shape scores computed from SSM when creating the new surfaces (pca_u_new_shapes_concat.csv) and the synthetic simulations in point correspondence (interpolated point clouds).
 3. Run: `$ cfd_dnn_training.ipynb` (update directories).
-4. Run: `$ cfd_dnn_testing.ipynb` (update directories).
+4. Run: `$ cfd_dnn_testing.ipynb` (update directories).  
+
+To get in contact, email: endrit.pajaziti.13@ucl.ac.uk
