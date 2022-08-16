@@ -67,9 +67,6 @@
 (ti-menu-load-string (format #f "mesh/scale 1000 1000 1000"))
 
 
-; write cgns
-(ti-menu-load-string (format #f "file/export/cgns ~a~a.cgns n pressure x-velocity y-velocity z-velocity velocity-magnitude ()" cgnsdir i))
-
 ; write ascii results file
 (ti-menu-load-string (format #f "file/export ascii ~a~a.csv default-interior , y cell-id x-coordinate y-coordinate z-coordinate pressure velocity-magnitude () n" csvdir i))
 
