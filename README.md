@@ -1,3 +1,5 @@
+![alt text](https://github.com/EndritPJ/CFD_Machine_Learning/blob/main/coverpic.png?raw=true)
+
 # Deep Neural Networks for Fast Aortic CFD
 Pipeline and code for building deep neural networks (DNNs) to predict computational fluid dynamics (CFD) pressure and velocity point clouds in aortas. Uses VMTK, Deformetrica (v4.3), Ansys Fluent (v19.0), Paraview and Keras. The code in this repo enables users to build DNNs with a collection of their own aortic surfaces (or other single inlet/outlet vessels).  
 
