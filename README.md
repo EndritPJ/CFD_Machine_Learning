@@ -1,5 +1,5 @@
 # Deep Neural Networks for Fast Aortic CFD
-Pipeline and code for building deep neural networks (DNNs) to predict computational fluid dynamics (CFD) pressure and velocity point clouds in aortas. Uses VMTK, Deformetrica (v4.3), Ansys Fluent (v19.0), Paraview and Keras.  
+Pipeline and code for building deep neural networks (DNNs) to predict computational fluid dynamics (CFD) pressure and velocity point clouds in aortas. Uses VMTK, Deformetrica (v4.3), Ansys Fluent (v19.0), Paraview and Keras. The code in this repo enables users to build DNNs with a collection of their own aortic surfaces (or other single inlet/outlet vessels).  
 
 ### Setup
 
@@ -13,14 +13,14 @@ Enter the Envs/ directory. You will need to build 3 separate environments (VMTK,
 
 ### Overview
 The process is split up into different stages:
-1) Statistical shape modelling (SSM) which is used for expressing aortas using lower-dimensional latent vectors. This also allows for the generation of synthetic aortas through random sampling. Built on Deformetrica, and original code written by Raphael Sivera (https://github.com/ClinicalCardiovascEngGroup/SSM/tree/master/python)
+1) Statistical shape modelling (SSM) which is used for expressing aortas using lower-dimensional latent vectors. This also allows for the generation of synthetic aortas through random sampling. Built using Deformetrica 4.3 and original code written by Raphael Sivera (https://github.com/ClinicalCardiovascEngGroup/SSM/tree/master/python)
 2) Meshing of surfaces to create volume meshes for CFD. The package used primarily for mesh editing is VMTK.
-3) Computational Fluid Dynamics is performed on a large train/test dataset of synthetic aortic meshes. Any CFD solver can be used, in this case the commercial platform Ansys Fluent was deployed. Post-processing of data with the platform Paraview is necessary.
+3) Computational Fluid Dynamics is performed on a large train/test dataset of synthetic aortic meshes. In this case the commercial platform Ansys Fluent was used. Post-processing of data with the platform Paraview is necessary.
 4) Finally, DNN model training and testing can commence. This is conducted using the package Keras and Tensorflow 2.0. It is recommended to have a high performance GPU (GTX1080 or higher) to speed up training.
 
 ### Initial Aortic Surface Preprocessing
 1) Create an empty project directory (e.g. CFD_ML_Aortas/).
-2) Create a subfolder containing your aortic surface meshes (in .vtk format). **If custom scaling has been applied to your aortic images/surface meshes please undo it**. Additionally, surface aortas should **be in millimetres**.
+2) Create a subfolder containing your aortic surface meshes (in .vtk format). **If custom scaling has been applied to your aortic images/surface meshes please revert it**. Additionally, surface aortas should **be in millimetres**.
 3) Enter the VMTK conda env.
 4) Remesh and smooth your surfaces: `$ python vmtk_remesher.py`
 5) Clip inlets and outlets manually: `$ python vmtk_clipper.py` . Ensure that clipping is consistent between subjects (e.g. STJ and diaphragm). Try to preserve curvature of aorta (no awkward angles in cuts).
@@ -44,7 +44,7 @@ The process is split up into different stages:
 6. Convert new .vtu files to Fluent meshes (.msh): `$ python vmtk_vtu2msh.py`
 7. Enter the Fluent/ directory and run: `$ python cfd_prepare.py`. This will output a Fluent journal file which will manage the CFD loop. Enter this file and edit it to select/change boundary conditions.
 8. Run the Fluent CFD simulations in batch mode in the terminal.
-9. After all simulations are completed, you should have a Point_Cloud and CGNS directory in the results folder. The next step is to interpolate all the CFD results back on the volume meshes (computed by SSM) which have point-point correspondence. To do this run: `$ pvbatch pview_resample_cfd2vtu` (make sure you edit the directories in the code first).
+9. After all simulations are completed, you should have a Point_Cloud directory in the results folder. The next step is to interpolate all the CFD results back on the volume meshes (computed by SSM) which have point-point correspondence. To do this run: `$ pvbatch pview_resample_cfd2vtu` (make sure you edit the directories in the code first).
 
 ### Neural Network Building
 1. Enter the Keras conda environment.
