@@ -63,6 +63,7 @@ def centerlines_single(ifile, ofile):
     #centreline.TargetIds = [1]
     centerline.SeedSelectorName = "openprofiles"
     centerline.Surface = reader.Surface
+    centerline.AppendEndPoints = 1
     centerline.Execute()
     # resample centerline to 100 points
     cent_geom = vmtk.vmtkcenterlinegeometry.vmtkCenterlineGeometry()

@@ -2,13 +2,13 @@ import os, sys, readline
 import vmtk
 from vmtk import vmtkscripts
 
-def registration_multiple(idir, odir):
+def registration_multiple(idir, rfile, odir):
     if not os.path.exists(odir):
         os.makedirs(odir)
 
-    # read 1st mesh in dir
+    # read reference surface
     reader = vmtk.vmtksurfacereader.vmtkSurfaceReader()
-    reader.InputFileName = idir + '/' + os.listdir(idir)[0]
+    reader.InputFileName = rfile
     reader.Execute()
     # set as registration target
     register = vmtk.vmtkicpregistration.vmtkICPRegistration()
@@ -60,5 +60,6 @@ if __name__=="__main__":
 
     if mode==2:
         idir = input("Enter input directory: ")
+        rfile = input("Enter path to registration target: ")
         odir = input("Enter output directory: ")
-        registration_multiple(idir, odir)
+        registration_multiple(idir, rfile, odir)
